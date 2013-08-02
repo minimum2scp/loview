@@ -1,0 +1,34 @@
+<html lang="ja">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>logirc</title>
+<style>
+<!--
+* { margin : 0 ; padding : 0 ; }
+body { width : 100% ; }
+#my_body { margin: 0 auto; width : 700px ; }
+#my_navigation { float : left ; width : 150px ; }
+#my_contents { float : left ; width : 550px ; }
+-->
+</style>
+</head>
+
+<body>
+<div id="my_header"></div>
+<div id="my_navigation">
+<% @files.reverse.each do |file| %>
+<% basename = File.basename(file) %>
+<% basename.slice!(0) # 先頭の「#」を削除 %>
+<a href="/<%= basename %>"><%= basename.match(/\d+/)[0] %></a>|
+<% end %>
+</div>
+<div id="my_contents">
+<pre>
+<%= @logs %>
+</pre>
+</div>
+<div id="my_footer"></div>
+</body>
+</html>
