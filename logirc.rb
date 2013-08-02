@@ -9,6 +9,12 @@ class Logirc < Sinatra::Base
   config = YAML.load(open(File.dirname( __FILE__ ) + "/config/config.yml"))
   logdir = config["logdir"]
 
+  if config["user"].to_s.length > 0
+    use Rack::Auth::Basic do |username, password|
+      username == config["user"] && password == config["password"]
+    end
+  end
+
   get %r{/(.*)$} do |c|
     @files = Dir.glob "#{logdir}*.log"
     if (c.length > 0)

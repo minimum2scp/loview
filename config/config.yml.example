@@ -1,1 +1,3 @@
 logdir: /path/to/log/
+user: user
+password: password
