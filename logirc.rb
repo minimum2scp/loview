@@ -16,7 +16,7 @@ class Logirc < Sinatra::Base
   end
 
   get %r{/(.*)$} do |c|
-    @files = Dir.glob "#{logdir}*.log"
+    @files = Dir.glob "#{logdir}\#*.log"
     if (c.length > 0)
       file = logdir + "#" + c
     else
