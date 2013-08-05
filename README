@@ -1,2 +1,4 @@
+cp config/config.yml.example config/config.yml
+vi config/config.yml
 bundle install --path vendor/bundle
 bundle exec rackup
