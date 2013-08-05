@@ -24,7 +24,7 @@ class Logirc < Sinatra::Base
     end
     logs = ""
     open(file) do |f|
-      logs = logs + "■" + file + "\n" + f.read + "\n"
+      logs = logs + "<< " + file + " >>\n" + f.read + "\n"
     end
     @logs = Rack::Utils.escape_html(logs)
     erb :logirc, :layout => false
