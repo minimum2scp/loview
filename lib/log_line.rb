@@ -1,0 +1,2 @@
+class LogLine
+end
