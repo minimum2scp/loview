@@ -8,9 +8,8 @@
 <!--
 * { margin : 0 ; padding : 0 ; }
 body { width : 100% ; }
-#my_body { margin: 0 auto; width : 700px ; }
-#my_navigation { float : left ; width : 150px ; }
-#my_contents { float : left ; width : 550px ; }
+#my_navigation { float : left ; width : 10% ; }
+#my_contents { float : left ; width : 80% ; }
 -->
 </style>
 </head>
@@ -25,9 +24,9 @@ body { width : 100% ; }
 <% end %>
 </div>
 <div id="my_contents">
-<pre>
-<%= @logs %>
-</pre>
+<% @logs.each_line do |l| %>
+<p><%= l %></p>
+<% end %>
 </div>
 <div id="my_footer"></div>
 </body>
