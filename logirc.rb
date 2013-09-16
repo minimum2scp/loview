@@ -2,6 +2,7 @@
 
 require "sinatra"
 require "yaml"
+require File.expand_path(File.dirname(__FILE__) + '/lib/log_line')
 
 class Logirc < Sinatra::Base
   enable :logging
