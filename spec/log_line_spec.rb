@@ -9,5 +9,6 @@ describe LogLine do
     LogLine.guess_type('[00:00:00] *** Quits: example_user (~example_user@example.com) ("Leaving...")').should == :system
     LogLine.guess_type('[00:00:00] <example_user> おはようございます。').should == :user
     LogLine.guess_type('[00:00:00] <example_user> [00:00:00] *** Quits: example_user (~example_user@example.com) ("Leaving...")').should == :user
+    LogLine.guess_type('hoge').should == :none
   end  
 end
