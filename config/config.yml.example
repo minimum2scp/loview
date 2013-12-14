@@ -1,3 +1,11 @@
 logdir: ./sample_logs/
 user: user
 password: password
+
+# files_pat の $1 がリストで使用される
+channels:
+  samplech:
+    files_pat: samplech_(\d+).log
+  samplech2:
+    files_pat: samplech2_(\d+).log
+

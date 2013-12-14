@@ -21,11 +21,21 @@ span.logtype_system { color : #888 ; }
 <body>
 <div id="my_header"></div>
 <div id="my_navigation">
-<% @files.reverse.each do |file| %>
-<% basename = File.basename(file) %>
-<% basename.slice!(0) # 先頭の「#」を削除 %>
-<a href="/<%= basename %>"><%= basename.match(/\d+/)[0] %></a>|
-<% end %>
+
+<% @channels.each do |chname,h| %>
+<%= "<b>#{chname}</b><br/>" %>
+<%
+  h["files"].each do |file|
+    basename = File.basename(file)
+    basename.slice!(0) # 先頭の「#」を削除
+    basename.match(h["files_pat"])
+    listname = $1 ? $1 : basename
+%>
+<a href="/<%= basename %>"><%= listname %></a>|
+<% 
+  end
+end
+%>
 </div>
 <div id="my_contents">
 <% cnt = 0 %>

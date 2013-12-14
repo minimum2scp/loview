@@ -17,7 +17,11 @@ class Logirc < Sinatra::Base
   end
 
   get %r{/(.*)$} do |c|
-    @files = Dir.glob "#{logdir}\#*.log"
+    @channels = config["channels"]
+    @files = Dir.glob("#{logdir}\#*.log").reverse
+    @channels.each do |name,h|
+      h["files"] = @files.select{|f| f.match(h["files_pat"])}
+    end
     if (c.length > 0)
       file = logdir + "#" + c
     else
