@@ -25,7 +25,12 @@ class Logirc < Sinatra::Base
     if (c.length > 0)
       file = logdir + "#" + c
     else
-      file = @files.last
+      begin
+        file = @channels.first[1]["files"].first
+        file ||= @files.first
+      rescue
+        file = @files.first
+      end
     end
     logs = ""
     open(file) do |f|
