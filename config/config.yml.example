@@ -6,6 +6,7 @@ password: password
 channels:
   samplech:
     files_pat: samplech_(\d+).log
+    files_threshold: 1
   samplech2:
     files_pat: samplech2_(\d+).log
 

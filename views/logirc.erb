@@ -16,6 +16,8 @@ span.logtype_title { color : #FFF ; background-color : #000 ; font-size : large 
 span.logtype_system { color : #888 ; }
 -->
 </style>
+<script type="text/javascript" src="js/jquery.js">
+</script>
 </head>
 
 <body>
@@ -23,19 +25,39 @@ span.logtype_system { color : #888 ; }
 <div id="my_navigation">
 
 <% @channels.each do |chname,h| %>
-<%= "<b>#{chname}</b><br/>" %>
+  <div name='channel_title'><%= chname %></div>
+    <div name='channel_list'>
 <%
+  files_cnt = 0
+  files_threshold = h["files_threshold"] ? h["files_threshold"] : 10
+  have_more_files = false
   h["files"].each do |file|
     basename = File.basename(file)
     basename.slice!(0) # 先頭の「#」を削除
     basename.match(h["files_pat"])
     listname = $1 ? $1 : basename
 %>
-<a href="/<%= basename %>"><%= listname %></a>|
+    <a href="/<%= basename %>"><%= listname %></a>|
 <% 
-  end
-end
+    files_cnt = files_cnt + 1
+    if files_cnt >= files_threshold
+      if !have_more_files #表示は最初の1度だけ
 %>
+    <p class="entry-excerpt-link" id="<%= chname %>">
+    <a href="JavaScript:void(0);" onclick="$('#<%= chname %>_more').show();$('#<%= chname %>').hide();return false;">more...</a></p>
+    <div id="<%= chname %>_more" style="display:none">
+<%
+      end
+      have_more_files = true
+    end
+  end
+%>
+<% if have_more_files %>
+    <a href="JavaScript:void(0);" onclick="$('#<%= chname %>_more').hide();$('#<%= chname %>').show();return false;">close</a>
+    </div>
+<% end %>
+  </div>
+<% end %>
 </div>
 <div id="my_contents">
 <% cnt = 0 %>
