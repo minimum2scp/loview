@@ -10,6 +10,7 @@
 body { width : 100% ; }
 #my_navigation { float : left ; width : 10% ; }
 #my_contents { float : left ; width : 80% ; }
+div.channel_title { color : #FFF ; background-color : #000 ; font-size : large ; }
 div.line_0 { background-color : #FFF ; }
 div.line_1 { background-color : #DDD ; }
 span.logtype_title { color : #FFF ; background-color : #000 ; font-size : large ; }
@@ -25,8 +26,8 @@ span.logtype_system { color : #888 ; }
 <div id="my_navigation">
 
 <% @channels.each do |chname,h| %>
-  <div name='channel_title'><%= chname %></div>
-    <div name='channel_list'>
+  <div class='channel_title'><%= chname %></div>
+    <div class='channel_list'>
 <%
   files_cnt = 0
   files_threshold = h["files_threshold"] ? h["files_threshold"] : 10
@@ -37,7 +38,9 @@ span.logtype_system { color : #888 ; }
     basename.match(h["files_pat"])
     listname = $1 ? $1 : basename
 %>
-    <a href="/<%= basename %>"><%= listname %></a>|
+    <div class="line_<%= files_cnt % 2 %>">
+      <a href="/<%= basename %>"><%= listname %></a>
+    </div>
 <% 
     files_cnt = files_cnt + 1
     if files_cnt >= files_threshold
