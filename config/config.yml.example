@@ -1,4 +1,5 @@
 logdir: ./sample_logs/
+logfile_pat: \#*.log
 user: user
 password: password
 

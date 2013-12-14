@@ -9,6 +9,7 @@ class Logirc < Sinatra::Base
 
   config = YAML.load(open(File.dirname( __FILE__ ) + "/config/config.yml"))
   logdir = config["logdir"]
+  logfile_pat = config["logfile_pat"]
 
   if config["user"].to_s.length > 0
     use Rack::Auth::Basic do |username, password|
@@ -18,7 +19,7 @@ class Logirc < Sinatra::Base
 
   get %r{/(.*)$} do |c|
     @channels = config["channels"]
-    @files = Dir.glob("#{logdir}\#*.log").reverse
+    @files = Dir.glob("#{logdir}#{logfile_pat}").reverse
     @channels.each do |name,h|
       h["files"] = @files.select{|f| f.match(h["files_pat"])}
     end
